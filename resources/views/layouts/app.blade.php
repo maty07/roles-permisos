@@ -42,8 +42,8 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('users.index') }}">Users</a>
               </li>
+            @endcan
               @can('roles.index')
-              @endcan
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
               </li>
@@ -87,6 +87,30 @@
   </nav>
 
   <main class="py-4">
+    @if(session('success'))
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="alert alert-success">
+              {{ session('success') }}
+            </div>
+          </div>
+        </div>
+      </div>
+    @endif
+
+    @if(session('error'))
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="alert alert-danger">
+              {{ session('error') }}
+            </div>
+          </div>
+        </div>
+      </div>
+    @endif
+
     @yield('content')
   </main>
 </div>

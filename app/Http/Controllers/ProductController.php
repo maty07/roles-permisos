@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('permission:products.index')->only('index');
+      $this->middleware('permission:products.create')->only(['create', 'store']);
+      $this->middleware('permission:products.show')->only('show');
+      $this->middleware('permission:products.edit')->only(['edit', 'update']);
+      $this->middleware('permission:products.destroy')->only(['destroy']);
+    }
 
     public function index()
     {
@@ -35,7 +43,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        return view('product.edit', compact('product'));
+        return view('products.edit', compact('product'));
     }
 
 
@@ -43,7 +51,7 @@ class ProductController extends Controller
     {
         $product->update($request->all());
 
-        return redirect()->route('product.edit', $product->id)
+        return redirect()->route('products.edit', $product->id)
                 ->with('success', 'Producto actualizado con éxito');
     }
 

@@ -22,62 +22,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware(['auth'])->group(function(){
 
   // ----------ROLES--------------------
-  Route::get('roles', 'RoleController@index')->name('roles.index')
-  ->middleware('permission:roles.index');
-
-  Route::get('roles/create', 'RoleController@create')->name('roles.create')
-  ->middleware('permission:roles.create');
-
-  Route::post('roles/store', 'RoleController@store')->name('roles.store')
-  ->middleware('permission:roles.create');
-
-  Route::get('roles/{role}', 'RoleController@show')->name('roles.show')
-  ->middleware('permission:roles.show');
-
-  Route::get('roles/{role}/edit', 'RoleController@edit')->name('roles.edit')
-  ->middleware('permission:roles.edit');
-
-  Route::put('roles/{role}', 'RoleController@update')->name('roles.update')
-  ->middleware('permission:roles.edit');
-
-  Route::put('roles/{role}', 'RoleController@destroy')->name('roles.destroy')
-  ->middleware('permission:roles.destroy');
+  Route::resource('roles', 'RoleController');
 
   // ----------PRODUCTS--------------------
-  Route::get('products', 'ProductController@index')->name('products.index')
-  ->middleware('permission:products.index');
+  Route::resource('products', 'ProductController');
 
-  Route::get('products/create', 'ProductController@create')->name('products.create')
-  ->middleware('permission:products.create');
-
-  Route::post('products/store', 'ProductController@store')->name('products.store')
-  ->middleware('permission:products.create');
-
-  Route::get('products/{product}', 'ProductController@show')->name('products.show')
-  ->middleware('permission:products.show');
-
-  Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit')
-  ->middleware('permission:products.edit');
-
-  Route::put('products/{product}', 'ProductController@update')->name('products.update')
-  ->middleware('permission:products.edit');
-
-  Route::put('products/{product}', 'ProductController@destroy')->name('products.destroy')
-  ->middleware('permission:roles.destroy');
 
   // ----------USERS--------------------
-  Route::get('users', 'UserController@index')->name('users.index')
-  ->middleware('permission:users.index');
+  Route::resource('users', 'UserController');
 
-  Route::get('users/{user}', 'UserController@show')->name('users.show')
-  ->middleware('permission:users.show');
-
-  Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')
-  ->middleware('permission:users.edit');
-
-  Route::put('users/{user}', 'UserController@update')->name('users.update')
-  ->middleware('permission:users.edit');
-
-  Route::put('users/{user}', 'UserController@destroy')->name('users.destroy')
-  ->middleware('permission:roles.destroy');
 });
